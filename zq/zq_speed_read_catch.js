@@ -123,6 +123,26 @@ function getspwzbody() {
             $.log(`${$.name}获取阅读: 成功, spwzbodys: ${bodyVal}`);
             $.msg($.name, `获取第一个阅读请求: 成功🎉`, ``)
         }
+    }else if ($request.url.match(/\/user.youth.cn\/v\?timestamp/)) {
+        bodyVal1 = $request.url.split('?')[1]
+        bodyVal = bodyVal1.split('&')[1]
+          console.log(bodyVal)
+
+      if (spwzbody) {
+          if (spwzbody.indexOf(bodyVal) > -1) {
+              $.log("此阅读请求已存在，本次跳过")
+          } else if (spwzbody.indexOf(bodyVal) == -1) {
+              spwzbodys = spwzbody + "&" + bodyVal;
+              $.setdata(spwzbodys, 'spwzbody');
+              $.log(`${$.name}获取阅读: 成功, spwzbodys: ${bodyVal}`);
+              bodys = spwzbodys.split("&")
+               $.msg($.name, "获取第" + bodys.length + "个阅读请求: 成功🎉", ``)
+          }
+      } else {
+          $.setdata(bodyVal, 'spwzbody');
+          $.log(`${$.name}获取阅读: 成功, spwzbodys: ${bodyVal}`);
+          $.msg($.name, `获取第一个阅读请求: 成功🎉`, ``)
+      }
     }
 
   }
