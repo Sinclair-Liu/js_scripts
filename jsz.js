@@ -8,22 +8,18 @@ crypto-js 文件地址：https://raw.githubusercontent.com/shaolin-kongfu/js_scr
 圈x请跑原作者脚本
 
 青龙抓包以下链接的header
-https://hh.102727.com/user/myInfo
+http://apponlie.sahaj.cn/user/myInfo
 变量：jszhd
 
 
 v2p配置重写如下：
 ***************************************************************************************************************
 [rewrite]
-
-https://hh.102727.com/user/myInfo 重写目标 https://raw.githubusercontent.com/shaolin-kongfu/js_scripts/main/jsz.js
-
-hostname = hh.102727.com
-
+http://apponlie.sahaj.cn/user/myInfo 重写目标 https://raw.githubusercontent.com/shaolin-kongfu/js_scripts/main/jsz.js
 [task]
 建议定时每十分钟跑一次 https://raw.githubusercontent.com/shaolin-kongfu/js_scripts/main/jsz.js
 ***************************************************************************************************************
-活动地址：https://github.com/shaolin-kongfu/js_scripts/blob/main/jysz.jpg
+活动地址：频道图片
 食用方法：
 1.先填写好上方的重写或打开抓包软件
 2.微信扫图片二维码，会自动跳出文章，等待10s左右，点击返回，点击停止阅读即可
@@ -117,7 +113,7 @@ $.log(jszhd)
 async function myInfo(){
  return new Promise((resolve) => {
  let plant6_url = {
-       url: `https://hh.102727.com/user/myInfo`,
+       url: `http://apponlie.sahaj.cn/user/myInfo`,
         headers: JSON.parse(jszhd),
         //body: `{"channel_id":188}`,
 
@@ -164,7 +160,7 @@ async function taskSeq(type){
 
 
  let plant6_url = {
-       url: `https://hh.102727.com/sign/todayAwardGain?taskSeq=${type}`,
+       url: `http://apponlie.sahaj.cn/sign/todayAwardGain?taskSeq=${type}`,
         headers: JSON.parse(jszhd),
         //body: `{"channel_id":188}`,
 
@@ -190,7 +186,7 @@ async function taskSeq(type){
 async function task(){
  return new Promise((resolve) => {
  let plant6_url = {
-       url: `https://hh.102727.com/task/fetchTask?taskType=1`,
+       url: `http://apponlie.sahaj.cn/task/fetchTask?taskType=1`,
         headers: JSON.parse(jszhd),
         //body: `{"channel_id":188}`,
 
@@ -250,12 +246,12 @@ async function completeTask(body){
 tk = JSON.parse(jszhd)
 token = tk.token
  let plant6_url = {
-       url: `https://hh.102727.com/task/completeTask`,
+       url: `http://apponlie.sahaj.cn/task/completeTask`,
         headers: {
 "Content-Type": "application/json;charset=UTF-8",
-"Host": "hh.102727.com",
-"Origin": "https://h8.102727.com",
-"Referer": "https://h8.102727.com/",
+"Host": "apponlie.sahaj.cn",
+"Origin": "http://dd.e-zine.top",
+"Referer": "http://dd.e-zine.top",
 "token": token,
 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.8(0x18000825) NetType/4G Language/zh_CN"},
         body: `${body}`,
@@ -283,12 +279,12 @@ tk = JSON.parse(jszhd)
 token = tk.token
 
  let plant6_url = {
-       url: `https://hh.102727.com/user/pickAuto`,
+       url: `http://apponlie.sahaj.cn/user/pickAuto`,
         headers: {
 "Content-Type": "application/json;charset=UTF-8",
-"Host": "hh.102727.com",
-"Origin": "https://h8.102727.com",
-"Referer": "https://h8.102727.com/",
+"Host": "apponlie.sahaj.cn",
+"Origin": "http://dd.e-zine.top",
+"Referer": "http://dd.e-zine.top",
 
 "token": token,
 "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.8(0x18000825) NetType/4G Language/zh_CN"},
