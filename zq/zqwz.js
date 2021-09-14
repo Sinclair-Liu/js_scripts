@@ -1,13 +1,9 @@
 
 /*
 shaolin-kongfu
-
 软件名称：中青看点
 赞赏:邀请码57984759
-
 万分感谢！！
-
-
 【MITM】
 kandian.wkandian.com
 【rewrite】
@@ -17,14 +13,13 @@ https://kandian.wkandian.com/v5/article/info.json 重写目标 https://raw.githu
 https://kandian.wkandian.com/v5/article/detail.json 重写目标 https://raw.githubusercontent.com/shaolin-kongfu/js_scripts/main/zq/zqwz.js
 时长
 https://kandian.wkandian.com/v5/user/stay.json 重写目标 https://raw.githubusercontent.com/shaolin-kongfu/js_scripts/main/zq/zqwz.js
-
 */
 
 const $ = new Env("中青看点阅读文章");
 const notify = $.isNode() ? require('./sendNotify') : '';
 message = ""
 
-let addtime = true
+
 let zqwzbody= $.isNode() ? (process.env.zqwzbody ? process.env.zqwzbody : "") : ($.getdata('zqwzbody') ? $.getdata('zqwzbody') : "")
 let zqwzbodyArr = []
 let zqwzbodys = ""
@@ -32,9 +27,7 @@ let zqwzbodys = ""
 let zq_timebody= $.isNode() ? (process.env.zq_timebody ? process.env.zq_timebody : "") : ($.getdata('zq_timebody') ? $.getdata('zq_timebody') : "")
 let zq_timebodyArr = []
 let zq_timebodys = ""
-let zqwznum
-let indexLast = $.getdata('zqbody_index')? $.getdata('zqbody_index'):0;
-const zq_timeheader={
+const jc_timeheader={
     'device-platform': 'android',
     'Content-Type': 'application/x-www-form-urlencoded',
     'Content-Length': '1197',
@@ -61,13 +54,13 @@ if (zq_timebody) {
     zq_timebody = fs.readFileSync("zq_timebody.txt", "utf8");
     if (zq_timebody !== `undefined`) {
         zq_timebodys = zq_timebody.split("\n");
-    } else {
+    } 
+}else {
         $.msg($.name, '【提示】请点击文章阅读1分钟获取timebody，再跑一次脚本', '不知道说啥好', {
             "open-url": "给您劈个叉吧"
         });
         $.done()
     }
-}
 Object.keys(zq_timebodys).forEach((item) => {
     if (zq_timebodys[item] && !zq_timebodys[item].startsWith("#")) {
         zq_timebodyArr.push(zq_timebodys[item])
@@ -88,13 +81,13 @@ if (zqwzbody) {
     zqwzbody = fs.readFileSync("zqwzbody.txt", "utf8");
     if (zqwzbody !== `undefined`) {
         zqwzbodys = zqwzbody.split("\n");
-    } else {
+    } 
+}else {
         $.msg($.name, '【提示】请点击文章获取body，再跑一次脚本', '不知道说啥好', {
             "open-url": "给您劈个叉吧"
         });
         $.done()
     }
-}
 Object.keys(zqwzbodys).forEach((item) => {
     if (zqwzbodys[item] && !zqwzbodys[item].startsWith("#")) {
         zqwzbodyArr.push(zqwzbodys[item])
@@ -109,35 +102,19 @@ Object.keys(zqwzbodys).forEach((item) => {
  }else {
 
         console.log(`共${zqwzbodyArr.length}个阅读body`)
-        index1 = indexLast * 1
-        for (let k =  index1 ? index1 : 0; k < zqwzbodyArr.length; k++) {
+        for (let k = 0; k < zqwzbodyArr.length; k++) {
             // $.message = ""
             zqwzbody1 = zqwzbodyArr[k];
             // console.log(`${zqwzbody1}`)
             console.log(`--------第 ${k + 1} 次阅读任务执行中--------\n`)
             await wzjl()
-            zqwznum = k+2
-            $.setdata(zqwznum, 'zqbody_index');
-            DD=10000+Math.floor(6000 * Math.random());
-            await $.wait(DD);
-           let num=zq_timebodyArr.length;
-			if ( num > 0 ) {
-				let m = Math.floor(Math.random()*(num));	
-				zq_timebody1=zq_timebodyArr[m];
-				if (addtime==true){
-						console.log(`-------------------------\n\n本次使用第${m+1}条时长链接\n`)
-						await timejl();
-				}
-				else{					
-					console.log(`-------------------------\n\n今日时长已超过2小时,跳过时长上传\n`)
-				}
-			}
-			else{
-				console.log(`-------------------------\n\n没有时长链接,请抓取一条时长`)
-			}
+            await $.wait(60000);
+            for (let k = 0; k < zq_timebodyArr.length; k++) {
+                zq_timebody1 = zq_timebodyArr[k];
+                await timejl()
+            }
             console.log("\n\n")
         }
-        $.setdata(0, 'zqbody_index');
     }
 
 
@@ -194,7 +171,6 @@ function wzjl(timeout = 0) {
                 const result = JSON.parse(data)
                 if(result.items.read_score !== "undefined" ){
                     console.log('\n浏览文章成功，获得：'+result.items.read_score + '金币')
-                    
                 }else{
                     console.log('\n看太久了，换一篇试试')
                 }
@@ -213,18 +189,18 @@ function getzq_timebody() {
             console.log(bodyVal)
         if (zq_timebody) {
             if (zq_timebody.indexOf(bodyVal) > -1) {
-                $.log("此阅读请求已存在，本次跳过")
+                $.log("此阅读时长请求已存在，本次跳过")
             } else if (zq_timebody.indexOf(bodyVal) == -1) {
                 zq_timebodys = zq_timebody + "&" + bodyVal;
                 $.setdata(zq_timebodys,'zq_timebody');
-                $.log(`${$.name}获取阅读: 成功, zq_timebodys: ${bodyVal}`);
+                $.log(`${$.name}获取阅读时长: 成功, zq_timebodys: ${bodyVal}`);
                 bodys = zq_timebodys.split("&")
-                // $.msg($.name, "获取第" + bodys.length + "个阅读请求: 成功🎉", ``)
+                 $.msg($.name, "获取第" + bodys.length + "个阅读时长请求: 成功🎉", ``)
             }
         } else {
             $.setdata($request.body,'zq_timebody');
-            $.log(`${$.name}获取阅读: 成功, zq_timebodys: ${bodyVal}`);
-            $.msg($.name, `获取第一个阅读请求: 成功🎉`, ``)
+            $.log(`${$.name}获取阅读时长: 成功, zq_timebodys: ${bodyVal}`);
+            $.msg($.name, `获取第一个阅读时长请求: 成功🎉`, ``)
         }
     }
 }
@@ -233,22 +209,14 @@ function timejl(timeout = 0) {
     return new Promise((resolve) => {
         let url = {
             url : 'https://kandian.wkandian.com/v5/user/stay.json',
-            headers : zq_timeheader,
+            headers : jc_timeheader,
             body : zq_timebody1,}//xsgbody,}
         $.post(url, async (err, resp, data) => {
             try {
 
                 const result = JSON.parse(data)
                 if(result.success === true ){
-                     //console.log('\n阅读时长：'+result.time + '秒')
-					readtimes = result.time / 60
-					$.log(`阅读时长共计` + Math.floor(readtimes) + `分钟`)
-					if (result.time >= Math.floor(Math.random() * (7200 - 9000) + 9000)) {
-					// 时长达2小时+，设置下次执行直接跳过
-						addtime=false;
-					}else{
-						addtime=true;
-					}
+                    console.log('\n阅读时长：'+result.time + '秒')
                 }else{
                     console.log('\n更新阅读时长失败')
                 }
