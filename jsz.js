@@ -220,10 +220,10 @@ async function task(){
             padding: CryptoJS.pad.Pkcs7
     })
 	    if (taskId !== null){
-             await $.wait(15000)
+             await $.wait(21000)
             await completeTask(js)
 	    }else{
-	    console.log('此账号已被限制阅读，请72小时后再跑脚本')
+	    console.log('此账号已被限制阅读，请24小时后再跑脚本')
 	    }
 
         }
