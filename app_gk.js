@@ -37,8 +37,8 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const logs = 0; //响应日志开关,默认关闭
 const app_soy_gk_authorization = [],kzkcount = '',app_soy_gk_deviceid=[]
 let subTitle = ``;
-let status;
-status = (status = ($.getval("gk_status") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
+// let status;
+// status = (status = ($.getval("gk_status") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
 let soy_gk_authorization = $.getdata('soy_gk_authorization')
 
 !(async () => {
@@ -108,23 +108,23 @@ for (i = 0; i < app_soy_gk_authorization.length; i++) {
 .finally(() => $.done());
 
 
-//获取ck
-function get_appdata() {
-   if ($request.url.indexOf("account") > -1) {
-const soy_gk_authorization = $request.headers.authorization
-   if(soy_gk_authorization){
-       $.setdata(soy_gk_authorization,`soy_gk_authorization${status}`)
-       //$.log(soy_gk_authorization)
-   }
+// //获取ck
+// function get_appdata() {
+//    if ($request.url.indexOf("account") > -1) {
+// const soy_gk_authorization = $request.headers.authorization
+//    if(soy_gk_authorization){
+//        $.setdata(soy_gk_authorization,`soy_gk_authorization${status}`)
+//        //$.log(soy_gk_authorization)
+//    }
    
-  const soy_gk_deviceid = $request.headers.deviceid
-   if(soy_gk_deviceid){
-       $.setdata(soy_gk_deviceid,`soy_gk_deviceid${status}`)
-       //$.log(soy_gk_authorization)
-   } 
+//   const soy_gk_deviceid = $request.headers.deviceid
+//    if(soy_gk_deviceid){
+//        $.setdata(soy_gk_deviceid,`soy_gk_deviceid${status}`)
+//        //$.log(soy_gk_authorization)
+//    } 
    
-  } 
-}
+//   } 
+// }
 
 function soy_gk_surplus(){
     return new Promise((resolve, reject) => {
