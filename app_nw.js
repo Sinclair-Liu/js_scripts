@@ -29,10 +29,11 @@ cron 0 11 18 22 * * *
 
 */
 
-// @grant    require
+// @grant require
+// @grant nodejs
 const $ = new Env('脑王1+1');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const axios = require("./axios.js");
+const axios = require("axios");
 const app_soy_nw_authorization = [],nwcount = ''
 let subTitle = ``;
 let status;
