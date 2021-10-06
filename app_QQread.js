@@ -18,24 +18,17 @@ export ywguid=''
 export ywkey=''
 export qrsn=''
 
-多号用 @ 或 换行 隔开
+多号用 @ 隔开
 
 就只有做任务
-
-
-cron 0 5-23 * * *  建议一小时一次
 
 */ 
 
 
 const $ = new Env('QQ阅读app');
 const notify = $.isNode() ? require('./sendNotify') : '';
-const logs = 0 //响应日志开关,默认关闭
 let subTitle = ``
-// let apptyq = true//是否填邀请，默认true
 let apptz = true//是否推送，默认true
-// let apptx=true//默认提现假,需要自行修改变量 RL_tx=true/false
-// let appje=''//提现金额,默认1.0元,需要修改自行添加变量 RL_tx=''
 let ywguid=[],ywkey=[],qrsn=[]
 
 ywg_uid = $.getdata('ywguid').split('@');
@@ -46,38 +39,21 @@ Object.keys(ywg_uid).forEach((item) => {
     }
 });
 
-// if (process.env.ywkey && process.env.ywkey.indexOf('@') > -1) {
 yw_key = $.getdata('ywkey').split('@');
     
-// } else if (process.env.ywkey && process.env.ywkey.indexOf('\n') > -1) {
-//     yw_key = process.env.ywkey.split('\n');
-    
-// } else {
-//     yw_key = process.env.ywkey.split()
-// };
 Object.keys(yw_key).forEach((item) => {
     if (yw_key[item]) {
         ywkey.push(yw_key[item])
     }
 });
 
-// if (process.env.qrsn && process.env.qrsn.indexOf('@') > -1) {
 qr_sn = $.getdata('qrsn').split('@');
     
-// } else if (process.env.qrsn && process.env.qrsn.indexOf('\n') > -1) {
-//     qr_sn = process.env.qrsn.split('\n');
-    
-// } else {
-//     qr_sn = process.env.qrsn.split()
-// };
 Object.keys(qr_sn).forEach((item) => {
     if (qr_sn[item]) {
         qrsn.push(qr_sn[item])
     }
 });
-    
-    
-// }
 
 !(async () => {
   if (!ywguid[0]&&!ywkey[0]&&!qrsn[0]) {
@@ -141,7 +117,6 @@ console.log(`-------- 共 ${ywguid.length} 个账号 --------`)
             //await $.wait(5000)
             //开定时箱子(注：这里目前我没成功见过后文，干脆注释掉吧，毕竟原来上面函数就会卡死掉)
             //await openBox();
-            
         }  
     }
     //推送消息
@@ -301,7 +276,7 @@ function YD_jsj() {
 function YD_info() {
     return new Promise((resolve, reject) => {
         $.get({
-            url : `https://eventv36.reader.qq.com/activity/pkg11955/inivite/fillcode?code=848819069`,
+            url : `https://eventv36.reader.qq.com/activity/pkg11955/inivite/fillcode?code=509353661`,
             headers : YD_headers,
         }, async(error, response, data) => {
             
