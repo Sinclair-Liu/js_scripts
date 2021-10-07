@@ -23,7 +23,7 @@
             "enable": true
         },
         {
-            "match": "https://user.youth.cn/FastApi/CommonReward/toGetReward.json",
+            "match": "(跟box冲突)https://user.youth.cn/FastApi/CommonReward/toGetReward.json",
             "target": "https://raw.githubusercontent.com/sonce/zqscripts/main/zq_speed_timebox.js",
             "enable": false
         },
