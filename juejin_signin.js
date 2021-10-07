@@ -10,6 +10,7 @@
   感谢原作者 hccluck https://github.com/hccluck/public_actions
  */
 
+  // @grant nodejs
   const $ = new Env('掘金社区');
   const notify = $.isNode() ? require('./sendNotify') : '';
   const fetch = require('node-fetch');
