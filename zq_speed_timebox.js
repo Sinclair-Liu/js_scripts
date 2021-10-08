@@ -17,6 +17,7 @@ const $ = new Env("中青看点极速版-定时宝箱");
 const apiUrl = 'https://user.youth.cn/FastApi/CommonReward/toGetReward.json' //重写目标 zq_speed_timebox.js
 const notify = $.isNode() ? require('./sendNotify') : '';
 message = ""
+const includeActions = ['share_reward', 'time_reward', 'box_zero']
 /**
  * @type string
  */
@@ -94,11 +95,12 @@ else {
 
 //获取定时宝箱body
 function getzqspeedtimebox() {
-    if ($request.url.indexOf(apiUrl)!=-1) {
+    if ($request.url.indexOf(apiUrl) != -1) {
         bodyVal = $request.body
         var bodyObj = parseQueryParas(bodyVal)
         //只获取定时宝箱0和定时宝箱
-        if (bodyObj.action == 'box_zero' || bodyObj.action == 'time_reward') {
+        
+        if (includeActions.indexOf(bodyObj.action)!=-1) {
             $.log(`${$.name}获取定时宝箱: 成功, zqspeedtimeboxs: ${bodyVal}`);
             // if (zqspeedtimebox) {
             var findIndex = isExists(bodyObj.uid, bodyObj.action)
@@ -115,7 +117,7 @@ function getzqspeedtimebox() {
 }
 
 //定时宝箱
-function zqbox(ck,timeout = 0) {
+function zqbox(ck, timeout = 0) {
     return new Promise((resolve) => {
         let url = {
             url: apiUrl,

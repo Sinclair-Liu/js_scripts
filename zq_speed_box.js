@@ -19,6 +19,7 @@ hostname = user.youth.cn
 */
 const $ = new Env("中青看点极速版-宝箱");
 const notify = $.isNode() ? require('./sendNotify') : '';
+const unincludeActions = ['share_reward', 'time_reward', 'box_zero']
 message = ""
 /**
  * @type string
@@ -102,7 +103,8 @@ function getzqspeedbox() {
         bodyVal = $request.body
         var bodyObj = parseQueryParas(bodyVal)
         //只获取宝箱0和宝箱
-        if (bodyObj.action != 'box_zero' && bodyObj.action != 'time_reward') {
+        
+        if (unincludeActions.indexOf(bodyObj.action)==-1) {
             $.log(`${$.name}获取宝箱: 成功, zqspeedboxs: ${bodyVal}`);
             // if (zqspeedbox) {
             var findIndex = isExists(bodyObj.uid, bodyObj.action)
