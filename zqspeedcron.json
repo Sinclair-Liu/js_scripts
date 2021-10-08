@@ -16,7 +16,7 @@
       {
         "name": "中青极速版定时宝箱",
         "type": "cron",
-        "time": "*/31 * * * *",
+        "time": "*/30 * * * *",
         "job": {
           "type": "runjs",
           "target": "https://raw.githubusercontent.com/sonce/zqscripts/main/zq_speed_timebox.js"
