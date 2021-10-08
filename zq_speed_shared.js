@@ -97,7 +97,7 @@ else
 function getArticle(ck, timeout = 0) {
     return new Promise((resolve,reject) => {
         let url = {
-            url: `https://user.youth.cn/FastApi/article/getTop3.json?${ck}`,
+            url: `https://user.youth.cn/FastApi/article/lists.json?${ck}`,
             headers: qdheader,
         }
         $.get(url, async (err, resp, data) => {

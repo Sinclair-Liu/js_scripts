@@ -17,15 +17,7 @@ const $ = new Env("中青看点极速版-签到");
 const apiUrl = 'https://user.youth.cn/FastApi/Task/sign.json' //重写目标 zq_speed_qd.js
 const notify = $.isNode() ? require('./sendNotify') : '';
 message = ""
-/**
- * @type string
- */
-let zqspeedqd = $.isNode() ? (process.env.zqspeedqd ? process.env.zqspeedqd : "") : ($.getdata('zqspeedqd') ? $.getdata('zqspeedqd') : "")
-/**
- * @type string[]
- */
-let zqspeedqdArr = []
-// let zqspeedqds = ""
+
 const qdheader = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'Content-Length': '482',
@@ -35,83 +27,70 @@ const qdheader = {
     'Sec-Fetch-Mode': 'cors'
 };
 
-if (zqspeedqd) {
-    if (zqspeedqd.indexOf("\n") == -1) {
-        zqspeedqdArr.push(zqspeedqd)
-    } else if (zqspeedqd.indexOf("\n") > -1) {
-        zqspeedqdArr = zqspeedqd.split(/\r?\n|\r/)
-        console.log(zqspeedqdArr.length)
-    } else if (process.env.zqspeedqd && process.env.zqspeedqd.indexOf("\n") > -1) {
-        zqspeedqdArr = process.env.zqspeedqd.split(/\r?\n|\r/);
+/**
+ * CK
+ * @type string
+ */
+let zqspeedck = $.isNode() ? (process.env.zqspeedck ? process.env.zqspeedck : "") : ($.getdata('zqspeedck') ? $.getdata('zqspeedck') : "")
+/**
+ * 用户集合
+ * @type string[]
+ */
+let zqspeedckArr = []
+if (zqspeedck) {
+    if (zqspeedck.indexOf("\n") == -1) {
+        zqspeedckArr.push(zqspeedck)
+    } else if (zqspeedck.indexOf("\n") > -1) {
+        zqspeedckArr = zqspeedck.split(/\r?\n|\r/)
+        console.log(zqspeedckArr.length)
+    } else if (process.env.zqspeedck && process.env.zqspeedck.indexOf("\n") > -1) {
+        zqspeedckArr = process.env.zqspeedck.split(/\r?\n|\r/);
         console.log(`您选择的是用"\n"隔开\n`)
     }
 } else if ($.isNode()) {
-    var fs = require("fs");
-    zqspeedqd = fs.readFileSync("zqspeedqd.txt", "utf8");
-    if (zqspeedqd !== `undefined`) {
-        zqspeedqdArr = zqspeedqd.split(/\r?\n|\r/);
+    var { readFileSync, existsSync } = require("fs");
+    var fileName = 'zqspeedck.txt'
+    if (existsSync(fileName))
+        zqspeedck = readFileSync("zqspeedck.txt", "utf8");
+    if (zqspeedck !== `undefined`) {
+        zqspeedckArr = zqspeedck.split(/\r?\n|\r/);
     }
 }
+//移除集合中的空字符
+zqspeedckArr = zqspeedckArr.filter(Boolean)
 
-//获取body,ck
-if (typeof $request !== "undefined") {
-    getzqspeedqd()
+if (zqspeedckArr.length <= 0) {
+    $.msg($.name, '【提示】重新进入程序，再跑一次脚本测试', '不知道说啥好', {
+        "open-url": "给您劈个叉吧"
+    });
     $.done()
+    // throw new Error("Something went badly wrong!");
 }
-else {
-    if (zqspeedqdArr.length <= 0) {
-        $.msg($.name, '【提示】请点击签到以获取body，明天再跑一次脚本测试', '不知道说啥好', {
-            "open-url": "给您劈个叉吧"
-        });
-        $.done()
-        // throw new Error("Something went badly wrong!");
-    }
-    else
-        !(async () => {
-            console.log(`共${zqspeedqdArr.length}个签到`)
-            for (let k = 0; k < zqspeedqdArr.length; k++) {
-                $.message = ""
-                zqspeedqd1 = zqspeedqdArr[k];
-                // console.log(`${zqspeedqd1}`)
-                console.log(`--------第 ${k + 1} 个签到任务执行中--------\n`)
-                await zqbox()
-                await $.wait(1000);
-                console.log("\n\n")
+else
+    !(async () => {
+        console.log(`共${zqspeedckArr.length}个账号签到`)
+        for (let k = 0; k < zqspeedckArr.length; k++) {
+            $.message = ""
+            zqspeedqd1 = zqspeedckArr[k];
+            // console.log(`${zqspeedqd1}`)
+            console.log(`--------第 ${k + 1} 个签到任务执行中--------\n`)
+            await zqbox()
+            await $.wait(1000);
+            console.log("\n\n")
+        }
+
+        date = new Date()
+        if ($.isNode() && date.getHours() == 11 && date.getMinutes() < 10) {
+            if (message.length != 0) {
+                await notify.sendNotify("中青看点极速版签到", `${message}\n\n shaolin-kongfu`);
             }
+        } else {
+            $.msg($.name, "", message)
+        }
 
-            date = new Date()
-            if ($.isNode() && date.getHours() == 11 && date.getMinutes() < 10) {
-                if (message.length != 0) {
-                    await notify.sendNotify("中青看点极速版签到", `${message}\n\n shaolin-kongfu`);
-                }
-            } else {
-                $.msg($.name, "", message)
-            }
-
-        })()
-            .catch((e) => $.logErr(e))
-            .finally(() => $.done())
-}
-
-//获取签到body
-function getzqspeedqd() {
-    if ($request.url.indexOf(apiUrl)!=-1) {
-        bodyVal = getQueryPara($request.url)
-        var bodyObj = parseQueryParas(bodyVal)
-        //只获取签到0和签到
-        $.log(`${$.name}获取签到: 成功, zqspeedqds: ${bodyVal}`);
-        // if (zqspeedqd) {
-        var findIndex = isExists(bodyObj.uid)
-        if (findIndex != -1) {
-            zqspeedqdArr[findIndex] = bodyVal
-            $.log("此签到请求已存在，本次将更新")
-        } else
-            zqspeedqdArr.push(bodyVal)
-
-        $.setdata(zqspeedqdArr.join('\n'), 'zqspeedqd');
-        $.msg($.name, "获取第" + zqspeedqdArr.length + "个签到请求: 成功🎉", ``)
-    }
-}
+    })()
+        .catch((e) => $.logErr(e))
+        .finally(() => $.done())
 
 //签到
 function zqbox(timeout = 0) {
@@ -139,16 +118,6 @@ function zqbox(timeout = 0) {
     })
 }
 
-
-function isExists(uid) {
-    var strUid = `uid=${uid}`
-    for (let index = 0; index < zqspeedqdArr.length; index++) {
-        const element = zqspeedqdArr[index];
-        if (element.indexOf(uid) != -1)
-            return index
-    }
-    return -1
-}
 function getQueryPara(url) {
     var strParse = url.substr(url.indexOf('?') + 1)
     return strParse
