@@ -103,7 +103,7 @@ function getzqspeedtx() {
         var bodyObj = parseQueryParas(bodyVal)
         $.log(`${$.name}获取提现: 成功, zqspeedtxs: ${bodyVal}`);
         // if (zqspeedtx) {
-        var findIndex = isExists(bodyObj.uid)
+        var findIndex = isExists(bodyObj.uid,bodyObj.money)
         if (findIndex != -1) {
             zqspeedtxArr[findIndex] = bodyVal
             $.log("此提现请求已存在，本次将更新")
@@ -143,15 +143,16 @@ function dozqspeedtx(ck, timeout = 0) {
 }
 
 
-function isExists(uid) {
-    var strUid = `uid=${uid}`
+function isExists(uid,money) {
+    var regex = new RegExp(`(?=.*uid=${uid})(?=.*money=${money})^.*$`, "gm");
     for (let index = 0; index < zqspeedtxArr.length; index++) {
         const element = zqspeedtxArr[index];
-        if (element.indexOf(uid) != -1)
+        if (regex.test(element))
             return index
     }
     return -1
 }
+
 function getQueryPara(url) {
     var strParse = url.substr(url.indexOf('?') + 1)
     return strParse
