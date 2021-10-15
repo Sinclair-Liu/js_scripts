@@ -18,7 +18,7 @@ let zqlookStartbody= $.isNode() ? (process.env.spzqlookStartbody ? process.env.s
 let zqlookStartbodyArr = []
 let zqlookStartbodys = ""
 
-let zq_cookie= $.isNode() ? (process.env.zqspeedck ? process.env.zqspeedck : "") : ($.getdata('zqspeedck') ? $.getdata('zqspeedck') : "")
+let zq_cookie= $.isNode() ? (process.env.spzq_cookie ? process.env.spzq_cookie : "") : ($.getdata('spzq_cookie') ? $.getdata('spzq_cookie') : "")
 let zq_cookieArr = []
 let zq_cookies = ""
 
@@ -53,24 +53,13 @@ const lookStartheader={
 
 
 if (zq_cookie) {
-    if (zq_cookie.indexOf("@") == -1 && zq_cookie.indexOf("@") == -1) {
+    if (zq_cookie.indexOf("\n") == -1 && zq_cookie.indexOf("\n") == -1) {
         zq_cookieArr.push(zq_cookie)
-    } else if (zq_cookie.indexOf("@") > -1) {
-        zq_cookies = zq_cookie.split("@")
-    } else if (process.env.zq_cookie && process.env.zq_cookie.indexOf('@') > -1) {
-        zq_cookieArr = process.env.zq_cookie.split('@');
-        console.log(`您选择的是用"@"隔开\n`)
-    }
-} else if($.isNode()){
-    var fs = require("fs");
-    zq_cookie = fs.readFileSync("zq_cookie.txt", "utf8");
-    if (zq_cookie !== `undefined`) {
-        zq_cookies = zq_cookie.split("\n");
-    } else {
-        $.msg($.name, '【提示】进入点击右下角"任务图标"，再跑一次脚本', '不知道说啥好', {
-            "open-url": "给您劈个叉吧"
-        });
-        $.done()
+    } else if (zq_cookie.indexOf("\n") > -1) {
+        zq_cookies = zq_cookie.split("\n")
+    } else if (process.env.zq_cookie && process.env.zq_cookie.indexOf('\n') > -1) {
+        zq_cookieArr = process.env.zq_cookie.split('\n');
+        console.log(`您选择的是用"\n"隔开\n`)
     }
 }
 Object.keys(zq_cookies).forEach((item) => {
@@ -79,24 +68,13 @@ Object.keys(zq_cookies).forEach((item) => {
     }
 })
 if (zqlookStartbody) {
-    if (zqlookStartbody.indexOf("&") == -1) {
+    if (zqlookStartbody.indexOf("@") == -1) {
         zqlookStartbodyArr.push(zqlookStartbody)
-    } else if (zqlookStartbody.indexOf("&") > -1) {
-        zqlookStartbodys = zqlookStartbody.split("&")
-    } else if (process.env.zqlookStartbody && process.env.zqlookStartbody.indexOf('&') > -1) {
-        zqlookStartbodyArr = process.env.zqlookStartbody.split('&');
-        console.log(`您选择的是用"&"隔开\n`)
-    }
-} else if($.isNode()){
-    var fs = require("fs");
-    zqlookStartbody = fs.readFileSync("zqlookStartbody.txt", "utf8");
-    if (zqlookStartbody !== `undefined`) {
-        zqlookStartbodys = zqlookStartbody.split("\n");
-    } else {
-        $.msg($.name, '【提示】请点击看看赚某一任务获取body', '不知道说啥好', {
-            "open-url": "给您劈个叉吧"
-        });
-        $.done()
+    } else if (zqlookStartbody.indexOf("@") > -1) {
+        zqlookStartbodys = zqlookStartbody.split("@")
+    } else if (process.env.zqlookStartbody && process.env.zqlookStartbody.indexOf('@') > -1) {
+        zqlookStartbodyArr = process.env.zqlookStartbody.split('@');
+        console.log(`您选择的是用"@"隔开\n`)
     }
 }
 Object.keys(zqlookStartbodys).forEach((item) => {
@@ -112,105 +90,73 @@ Object.keys(zqlookStartbodys).forEach((item) => {
  }else{
     console.log(`共${zqlookStartbodyArr.length}个看看赚body`)
 	        for (let k = 0; k < zqlookStartbodyArr.length; k++) {
-
                 zqlookStartbody1 = zqlookStartbodyArr[k];
                 console.log(`--------第 ${k + 1} 次看看赚激活执行中--------\n`)
-                    await lookStart()
+                await lookStart()
                 await $.wait(1000);
                 console.log("\n\n")
             }
             console.log(`共${zq_cookieArr.length}个cookie`)
-	        for (let k = 0; k < zq_cookieArr.length; k++) {
-                bodyVal = zq_cookieArr[k].split('&uid=')[0];
-                var time1 = Date.parse( new Date() ).toString();
-                time1 = time1.substr(0,10);
+// 	        for (let k = 0; k < zq_cookieArr.length; k++) {
+//                 bodyVal = zq_cookieArr[k].split('&uid=')[0];
+//                 var time1 = Date.parse( new Date() ).toString();
+//                 time1 = time1.substr(0,10);
 
-                cookie = bodyVal.replace(/zqkey=/, "cookie=")
-                cookie_id = cookie.replace(/zqkey_id=/, "cookie_id=")
-                zq_cookie1= cookie_id  +'&device_brand=xfdg&device_id=cc7dgdsgfsz83e&device_model=1gx&device_platform=android&device_type=android&inner_version=202107261526&mi=0&openudid=cc7dgdsgfsz83e&os_api=27&os_version=bdftgsdfga&phone_network=WIFI&phone_sim=1'+'&request_time=' + time1 +'&time=' + time1 +'&'+ bodyVal
-                //console.log(`${zq_cookie1}`)
-                console.log(`--------第 ${k + 1} 个账号看看赚上方宝箱奖励执行中--------\n`)
-                for(let k = 0; k < 3; k++){
-                    id = k.toString()
-                    await openbox(id,zq_cookie1)
-                    await $.wait(30000);
+//                 cookie = bodyVal.replace(/zqkey=/, "cookie=")
+//                 cookie_id = cookie.replace(/zqkey_id=/, "cookie_id=")
+//                 zq_cookie1= cookie_id  +'&device_brand=xfdg&device_id=cc7dgdsgfsz83e&device_model=1gx&device_platform=android&device_type=android&inner_version=202107261526&mi=0&openudid=cc7dgdsgfsz83e&os_api=27&os_version=bdftgsdfga&phone_network=WIFI&phone_sim=1'+'&request_time=' + time1 +'&time=' + time1 +'&'+ bodyVal
+//                 //console.log(`${zq_cookie1}`)
+//                 console.log(`--------第 ${k + 1} 个账号看看赚上方宝箱奖励执行中--------\n`)
+//                 for(let k = 0; k < 3; k++){
+//                     id = k.toString()
+//                     await openbox(id,zq_cookie1)
+//                     await $.wait(30000);
+//                 }
+//                 console.log("\n\n")
 
-                }
-
-                console.log("\n\n")
-
-            }
+//             }
 
 
-function openbox(id,zq_cookie1,timeout=0) {
-    return new Promise((resolve) => {
-        let url = {
-            url : 'https://kandian.wkandian.com/WebApi/Nameless/getBoxReward?id='+ id + '&' + zq_cookie1,
-            headers : {
-    'Host': 'kandian.wkandian.com',
-     //'Referer': 'https://kandian.wkandian.com/h5/20190527watchMoney/?' +zq_cookie1
-     'Referer':'https://kandian.wkandian.com/h5/20190527watchMoney/?keyword_wyq=woyaoq.com&access=WIFI&app-version=8.1.2&app_version=8.1.2&carrier=%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8&channel=c1005&'+zq_cookie1},
-            }
-        $.get(url, async (err, resp, data) => {
-            try {
+// function openbox(id,zq_cookie1,timeout=0) {
+//     return new Promise((resolve) => {
+//         let url = {
+//             url : 'https://kandian.wkandian.com/WebApi/Nameless/getBoxReward?id='+ id + '&' + zq_cookie1,
+//             headers : {
+//     'Host': 'kandian.wkandian.com',
+//      //'Referer': 'https://kandian.wkandian.com/h5/20190527watchMoney/?' +zq_cookie1
+//      'Referer':'https://kandian.wkandian.com/h5/20190527watchMoney/?keyword_wyq=woyaoq.com&access=WIFI&app-version=8.1.2&app_version=8.1.2&carrier=%E4%B8%AD%E5%9B%BD%E7%A7%BB%E5%8A%A8&channel=c1005&'+zq_cookie1},
+//             }
+//         $.get(url, async (err, resp, data) => {
+//             try {
 
-                const result = JSON.parse(data)
-                if(result.status == 1){
-                    console.log(result.data)
-                }else{
-                     console.log(result)
-                }
-            } catch (e) {
-            } finally {
-                resolve()
-            }
-            },timeout)
-    })
-}}
+//                 const result = JSON.parse(data)
+//                 if(result.status == 1){
+//                     console.log(result.data)
+//                 }else{
+//                      console.log(result)
+//                 }
+//             } catch (e) {
+//             } finally {
+//                 resolve()
+//             }
+//             },timeout)
+//     })
+// }
+}
     })()
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
 
 
-
-
-
-
-
-
-//获取看看赚激活body
-async function getzqlookStartbody() {
-if ($request.url.match(/\/kandian.wkandian.com\/v5\/nameless\/adlickstart/)) {
-          bodyVal=$request.body
-          await $.wait(1100);
-        if (zqlookStartbody) {
-            if (zqlookStartbody.indexOf(bodyVal) > -1) {
-                $.log("此看看赚任务请求已存在，本次跳过")
-            } else if (zqlookStartbody.indexOf(bodyVal) == -1) {
-                zqlookStartbodys = zqlookStartbody + "&" + bodyVal;
-                $.setdata(zqlookStartbodys, 'zqlookStartbody');
-                $.log(`${$.name}获取看看赚任务: 成功, zqlookStartbodys: ${bodyVal}`);
-                bodys = zqlookStartbodys.split("&")
-                 $.msg($.name, "获取第" + bodys.length + "个看看赚任务请求: 成功🎉", ``)
-            }
-        } else {
-            $.setdata(bodyVal, 'zqlookStartbody');
-            $.log(`${$.name}获取看看赚任务: 成功, zqlookStartbodys: ${bodyVal}`);
-            $.msg($.name, `获取第一个看看赚任务请求: 成功🎉`, ``)
-        }
-    }
-
-  }
 //看看赚激活
 function lookStart(timeout = 0) {
     return new Promise((resolve) => {
         let url = {
-            url : 'https://kandian.wkandian.com/v5/nameless/adlickstart.json',
+            url : 'https://user.youth.cn/v1/Nameless/adlickstart.json',
             headers : lookStartheader,
-            body : zqlookStartbody1,}//xsgbody,}
+            body : zq_cookie + "&" + zqlookStartbody1,}//xsgbody,}
         $.post(url, async (err, resp, data) => {
             try {
-
                 const result = JSON.parse(data)
                 if(result.success === true ){
                     console.log('\n激活看看赚任务成功')
@@ -227,11 +173,10 @@ function lookStart(timeout = 0) {
                         await $.wait(10000);
                     await reward()
                     }
-
                 }else{
                     console.log('\n激活看看赚任务失败')
-                    smbody = $.getdata('zqlookStartbody').replace(zqlookStartbody1 + "&", "");
-                    $.setdata(smbody, 'zqlookStartbody');
+                    smbody = $.getdata('spzqlookStartbody').replace(zqlookStartbody1 + "@", "");
+                    $.setdata(smbody, 'spzqlookStartbody');
                     console.log("该看看赚任务已自动删除")
                 }
             } catch (e) {
@@ -245,9 +190,9 @@ function lookStart(timeout = 0) {
 function lookstart(timeout = 0) {
     return new Promise((resolve) => {
         let url = {
-            url : 'https://kandian.wkandian.com/v5/nameless/bannerstatus.json',
+            url : 'https://user.youth.cn/v1/Nameless/bannerstatus.json',
             headers : lookheader,
-            body : zqlookStartbody1,}//xsgbody,}
+            body : zq_cookie + "&" + zqlookStartbody1,}//xsgbody,}
         $.post(url, async (err, resp, data) => {
             try {
 
@@ -269,12 +214,11 @@ function lookstart(timeout = 0) {
 function reward(timeout = 0) {
     return new Promise((resolve) => {
         let url = {
-            url : 'https://kandian.wkandian.com/v5/nameless/adlickend.json',
+            url : 'https://user.youth.cn/v1/Nameless/adlickend.json',
             headers : rewardheader,
-            body : zqlookStartbody1,}//xsgbody,}
+            body : zq_cookie + "&" + zqlookStartbody1,}//xsgbody,}
         $.post(url, async (err, resp, data) => {
             try {
-
                 const result = JSON.parse(data)
                 if(result.items.score !== "undefined" ){
                     console.log('\n看看赚获得：'+result.items.score + '金币')

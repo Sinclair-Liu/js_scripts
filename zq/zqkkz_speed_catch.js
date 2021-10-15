@@ -57,7 +57,7 @@ Object.keys(zqlookStartbodys).forEach((item) => {
 
 //获取看看赚激活body
 async function getzqlookStartbody() {
-if ($request.url.match(/\/user.youth.cn\/v1\/Nameless\/adlickstart.json/)) {
+if ($request.url.match(/\/user.youth.cn\/v1\/Nameless\/adlickstart/)) {
         bodyVal1 = $request.body
         bodyVal = "sign=" + bodyVal1.match(/sign=(\w+)/)[1] + "&task_id=" + bodyVal1.match(/task_id=(\w+)/)[1]
         await $.wait(1100);
