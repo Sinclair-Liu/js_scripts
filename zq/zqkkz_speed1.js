@@ -14,11 +14,11 @@ const $ = new Env("中青看点看看赚");
 const notify = $.isNode() ? require('./sendNotify') : '';
 message = ""
 
-let zqlookStartbody= $.isNode() ? (process.env.spzqlookStartbody ? process.env.spzqlookStartbody : "") : ($.getdata('spzqlookStartbody') ? $.getdata('spzqlookStartbody') : "")
+let zqlookStartbody= $.isNode() ? (process.env.spzqlookStartbody1 ? process.env.spzqlookStartbody1 : "") : ($.getdata('spzqlookStartbody1') ? $.getdata('spzqlookStartbody1') : "")
 let zqlookStartbodyArr = []
 let zqlookStartbodys = ""
 
-let zq_cookie= $.isNode() ? (process.env.spzq_cookie ? process.env.spzq_cookie : "") : ($.getdata('spzq_cookie') ? $.getdata('spzq_cookie') : "")
+let zq_cookie= $.isNode() ? (process.env.spzq_cookie1 ? process.env.spzq_cookie1 : "") : ($.getdata('spzq_cookie1') ? $.getdata('spzq_cookie1') : "")
 let zq_cookieArr = []
 let zq_cookies = ""
 
@@ -146,7 +146,6 @@ function openbox(id,zq_cookie1,timeout=0) {
     .catch((e) => $.logErr(e))
     .finally(() => $.done())
 
-
 //看看赚激活
 function lookStart(timeout = 0) {
     return new Promise((resolve) => {
@@ -174,8 +173,8 @@ function lookStart(timeout = 0) {
                     }
                 }else{
                     console.log('\n激活看看赚任务失败')
-                    smbody = $.getdata('spzqlookStartbody').replace(zqlookStartbody1 + "@", "");
-                    $.setdata(smbody, 'spzqlookStartbody');
+                    smbody = $.getdata('spzqlookStartbody1').replace(zqlookStartbody1 + "@", "");
+                    $.setdata(smbody, 'spzqlookStartbody1');
                     console.log("该看看赚任务已自动删除")
                 }
             } catch (e) {
