@@ -25,7 +25,7 @@ let zq_cookies = ""
 //待改
 const lookheader = {
     'Accept-Language': 'zh-CN',
-    'user-agent': 'Mozilla/5.0 (Linux; Android 10; LIO-AN00 Build/HUAWEILIO-AN00;)AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/18.0.1025 Mobile Safari/537.36 hap/1079/huawei com.huawei.fastapp/11.3.2.311 com.youth.kandianquickapp/2.5.0 ({"type":"shortcut","packageName":"com.huawei.android.launcher","extra":{"scene":"api","original":{"type":"url","packageName":"com.huawei.appmarket"}}})',
+    'user-agent': 'Mozilla/5.0 (Linux; Android 9; LLD-AL20 Build/HONORLLD-AL20;)AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/18.0.1025 Mobile Safari/537.36 hap/1079/huawei com.huawei.fastapp/11.4.1.310 com.youth.kandianquickapp/2.5.0 ({"type":"shortcut","packageName":"com.huawei.android.launcher","extra":{"scene":"api","original":{"type":"url","packageName":"com.huawei.systemmanager"}}})',
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Host': 'user.youth.cn',
     'Connection': 'Keep-Alive',
@@ -34,7 +34,7 @@ const lookheader = {
 //待改
 const rewardheader={
     'Accept-Language': 'zh-CN',
-    'user-agent': 'Mozilla/5.0 (Linux; Android 10; LIO-AN00 Build/HUAWEILIO-AN00;)AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/18.0.1025 Mobile Safari/537.36 hap/1079/huawei com.huawei.fastapp/11.3.2.311 com.youth.kandianquickapp/2.5.0 ({"type":"shortcut","packageName":"com.huawei.android.launcher","extra":{"scene":"api","original":{"type":"url","packageName":"com.huawei.appmarket"}}})',
+    'user-agent': 'Mozilla/5.0 (Linux; Android 9; LLD-AL20 Build/HONORLLD-AL20;)AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/18.0.1025 Mobile Safari/537.36 hap/1079/huawei com.huawei.fastapp/11.4.1.310 com.youth.kandianquickapp/2.5.0 ({"type":"shortcut","packageName":"com.huawei.android.launcher","extra":{"scene":"api","original":{"type":"url","packageName":"com.huawei.systemmanager"}}})',
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Host': 'user.youth.cn',
     'Connection': 'Keep-Alive',
@@ -43,7 +43,7 @@ const rewardheader={
 
 const lookStartheader={
     'Accept-Language': 'zh-CN',
-    'user-agent': 'Mozilla/5.0 (Linux; Android 10; LIO-AN00 Build/HUAWEILIO-AN00;)AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/18.0.1025 Mobile Safari/537.36 hap/1079/huawei com.huawei.fastapp/11.3.2.311 com.youth.kandianquickapp/2.5.0 ({"type":"shortcut","packageName":"com.huawei.android.launcher","extra":{"scene":"api","original":{"type":"url","packageName":"com.huawei.appmarket"}}})',
+    'user-agent': 'Mozilla/5.0 (Linux; Android 9; LLD-AL20 Build/HONORLLD-AL20;)AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/18.0.1025 Mobile Safari/537.36 hap/1079/huawei com.huawei.fastapp/11.4.1.310 com.youth.kandianquickapp/2.5.0 ({"type":"shortcut","packageName":"com.huawei.android.launcher","extra":{"scene":"api","original":{"type":"url","packageName":"com.huawei.systemmanager"}}})',
     'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Host': 'user.youth.cn',
     'Connection': 'Keep-Alive',
