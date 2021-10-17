@@ -28,7 +28,7 @@ let app_jglxs = ""
         app_jglxArr.push($.getdata(`app_jglx${i}`))
       }
       console.log(`-------------共${app_jglxArr.length}个账号-------------\n`)
-      for (let i = 0; i < app_jglxyArr.length; i++) {
+      for (let i = 0; i < app_jglxArr.length; i++) {
         if (app_jglxArr[i]) {
           app_jglx = app_jglxArr[i];
           $.index = i + 1;
