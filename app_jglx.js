@@ -100,9 +100,9 @@ function login(timeout = 0) {
            await takeExercises3(token)
            await takeExercises4(token)
            await takeExercises5(token)
-           await takeExercises6(token)
-           await takeExercises7(token)
-           await takeExercises8(token)
+        //    await takeExercises6(token)
+        //    await takeExercises7(token)
+        //    await takeExercises8(token)
            
 		   await $.wait(300000)
            await receiveRewardsExercises1(token)
@@ -110,9 +110,9 @@ function login(timeout = 0) {
            await receiveRewardsExercises3(token)
            await receiveRewardsExercises4(token)
            await receiveRewardsExercises5(token)
-           await receiveRewardsExercises6(token)
-           await receiveRewardsExercises7(token)
-           await receiveRewardsExercises8(token)
+        //    await receiveRewardsExercises6(token)
+        //    await receiveRewardsExercises7(token)
+        //    await receiveRewardsExercises8(token)
          } else {
            $.log(`\n请填写正确的手机号和密码`)
          }
