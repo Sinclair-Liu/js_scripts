@@ -240,7 +240,7 @@ function qiandaonum(token) {
       } finally {
         resolve()
       }
-    }, timeout)
+    }, 3000)
   })
 }
 
