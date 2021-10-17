@@ -345,7 +345,7 @@ function takeExercises7(token) {
   return new Promise((resolve) => {
     
 	let url = {
-      url: `http://yangsenhb.com/api/index/takeExercises`,
+      url: `https://yangsenhb.com/api/index/takeExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -381,7 +381,7 @@ function takeExercises1(token) {
     return new Promise((resolve) => {
       
       let url = {
-        url: `http://yangsenhb.com/api/index/takeExercises`,
+        url: `https://yangsenhb.com/api/index/takeExercises`,
         headers: {
           'Host': 'yangsenhb.com',
           'Content-Type': 'application/json;charset=utf-8',
@@ -418,7 +418,7 @@ function takeExercises2(token) {
   return new Promise((resolve) => {
     
 	let url = {
-      url: `http://yangsenhb.com/api/index/takeExercises`,
+      url: `https://yangsenhb.com/api/index/takeExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -454,7 +454,7 @@ function takeExercises3(token) {
   return new Promise((resolve) => {
     
 	let url = {
-      url: `http://yangsenhb.com/api/index/takeExercises`,
+      url: `https://yangsenhb.com/api/index/takeExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -490,7 +490,7 @@ function takeExercises4(token) {
   return new Promise((resolve) => {
     
 	let url = {
-      url: `http://yangsenhb.com/api/index/takeExercises`,
+      url: `https://yangsenhb.com/api/index/takeExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -526,7 +526,7 @@ function takeExercises5(token) {
   return new Promise((resolve) => {
     
 	let url = {
-      url: `http://yangsenhb.com/api/index/takeExercises`,
+      url: `https://yangsenhb.com/api/index/takeExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -562,7 +562,7 @@ function takeExercises6(token) {
   return new Promise((resolve) => {
     
 	let url = {
-      url: `http://yangsenhb.com/api/index/takeExercises`,
+      url: `https://yangsenhb.com/api/index/takeExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -598,7 +598,7 @@ function takeExercises8(token) {
   return new Promise((resolve) => {
     
 	let url = {
-      url: `http://yangsenhb.com/api/index/takeExercises`,
+      url: `https://yangsenhb.com/api/index/takeExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -636,7 +636,7 @@ function receiveRewardsExercises1(token) {
     return new Promise((resolve) => {
      
       let url = {
-        url: `http://yangsenhb.com/api/index/receiveRewardsExercises`,
+        url: `https://yangsenhb.com/api/index/receiveRewardsExercises`,
         headers: {
           'Host': 'yangsenhb.com',
           'Content-Type': 'application/json;charset=utf-8',
@@ -669,7 +669,7 @@ function receiveRewardsExercises2(token) {
   return new Promise((resolve) => {
    
 	let url = {
-      url: `http://yangsenhb.com/api/index/receiveRewardsExercises`,
+      url: `https://yangsenhb.com/api/index/receiveRewardsExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -700,7 +700,7 @@ function receiveRewardsExercises3(token) {
   return new Promise((resolve) => {
    
 	let url = {
-      url: `http://yangsenhb.com/api/index/receiveRewardsExercises`,
+      url: `https://yangsenhb.com/api/index/receiveRewardsExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -730,7 +730,7 @@ function receiveRewardsExercises3(token) {
   return new Promise((resolve) => {
    
 	let url = {
-      url: `http://yangsenhb.com/api/index/receiveRewardsExercises`,
+      url: `https://yangsenhb.com/api/index/receiveRewardsExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -760,7 +760,7 @@ function receiveRewardsExercises3(token) {
   return new Promise((resolve) => {
    
 	let url = {
-      url: `http://yangsenhb.com/api/index/receiveRewardsExercises`,
+      url: `https://yangsenhb.com/api/index/receiveRewardsExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -790,7 +790,7 @@ function receiveRewardsExercises3(token) {
   return new Promise((resolve) => {
    
 	let url = {
-      url: `http://yangsenhb.com/api/index/receiveRewardsExercises`,
+      url: `https://yangsenhb.com/api/index/receiveRewardsExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -820,7 +820,7 @@ function receiveRewardsExercises3(token) {
   return new Promise((resolve) => {
    
 	let url = {
-      url: `http://yangsenhb.com/api/index/receiveRewardsExercises`,
+      url: `https://yangsenhb.com/api/index/receiveRewardsExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
@@ -850,7 +850,7 @@ function receiveRewardsExercises3(token) {
   return new Promise((resolve) => {
    
 	let url = {
-      url: `http://yangsenhb.com/api/index/receiveRewardsExercises`,
+      url: `https://yangsenhb.com/api/index/receiveRewardsExercises`,
       headers: {
         'Host': 'yangsenhb.com',
         'Content-Type': 'application/json;charset=utf-8',
