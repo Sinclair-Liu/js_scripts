@@ -18,11 +18,11 @@ let app_jglx = $.isNode() ? (process.env.app_jglx ? process.env.app_jglx : "") :
 let app_jglxs = ""
 //
 !(async() => {
-  if (typeof $request !== "undefined") {
+  if (typeof $request != "undefined") {
     // jglxck()
   } else {
     if (!$.isNode()) {
-      app_jglxArr.push($.getdata('jglx'))
+      app_jglxArr.push($.getdata('app_jglx'))
       let jglxcount = ($.getval('jglxcount') || '1');
       for (let i = 2; i <= jglxcount; i++) {
         app_jglxArr.push($.getdata(`app_jglx${i}`))
@@ -79,7 +79,7 @@ function login(timeout = 0) {
         'Origin': 'https://yangsenhb.com',
         'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
         'Referer' : 'https://yangsenhb.com/'
-    },
+      },
       body: `{"username":"${user}","password":"${mima}","token":null}`,
     }
     $.post(url, async (err, resp, data) => {
@@ -87,12 +87,11 @@ function login(timeout = 0) {
         result = JSON.parse(data);
         if (result.code == 1) {
            token = result.data.token
-           $.log(`\ntoken获取成功
-开始执行签到`)
+           $.log(`\ntoken获取成功 开始执行签到`)
            await $.wait(3000);
            await sign(token);//签到
 		   await $.wait(3000);
-		   await qiandaonum();//签到天数
+		   await qiandaonum(token);//签到天数
 		   await $.wait(3000);
 		   await getask(token)//答题
 		   
@@ -197,7 +196,7 @@ function qiandaogoodslist(timeout = 0) {
 }
 
 //签到天数
-function qiandaonum(timeout = 0) {
+function qiandaonum(token) {
   return new Promise((resolve) => {
     let url = {
       url: `https://yangsenhb.com/api/user/getSignLx`,
