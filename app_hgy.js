@@ -7,8 +7,7 @@ export app_hgy='手机号#密码'
 
 // [task_local]
 //#花果园
-// 10 0 * * * https://raw.githubusercontent.com/ctmd/main/app_hgy.js, tag=花果园APP, enabled=true
-
+// 10 0 * * * https://cdn.jsdelivr.net/gh/byxiaopeng/myscripts@main/app_hgy.js, tag=花果园APP, enabled=true
 
 const $ = new Env('花果园APP签到');
 let status;
@@ -417,7 +416,7 @@ function getwater(token) {
     let url = {
       url: `https://www.hzhuayangsz.com/api/tree/getSeedTask`,
       headers: {
-        'Host': 'admin.yoo-woo.com',
+        'Host': 'www.hzhuayangsz.com',
         'Content-Type': 'application/json;charset=utf-8',
         'Origin': 'http://app.hzhuayangsz.com',
         'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
@@ -457,7 +456,7 @@ function getdrop(seed_data, token) {
     let url = {
       url: `https://www.hzhuayangsz.com/api/tree/getDrop`,
       headers: {
-        'Host': 'admin.yoo-woo.com',
+        'Host': 'www.hzhuayangsz.com',
         'Content-Type': 'application/json;charset=utf-8',
         'Origin': 'http://app.hzhuayangsz.com',
         'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
@@ -487,9 +486,9 @@ function getdrop(seed_data, token) {
 function water(seed_task_uuid, token) {
   return new Promise((resolve) => {
     let url = {
-      url: `https://www.hzhuayangsz.com/api/tree/getSeedTask`,
+      url: `https://www.hzhuayangsz.com/api/tree/seedAction`,
       headers: {
-        'Host': 'admin.yoo-woo.com',
+        'Host': 'www.hzhuayangsz.com',
         'Content-Type': 'application/json;charset=utf-8',
         'Origin': 'http://app.hzhuayangsz.com',
         'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
