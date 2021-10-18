@@ -97,10 +97,10 @@ function login(timeout = 0) {
           await $.wait(3000);
           await getAnswer(token)//答题
           await $.wait(3000);
-          // for (video_id = 50; video_id < 53; video_id++) {
-          //     await getIntegralByVideo(video_id, token)//视频
-          //     await $.wait(5000)
-          // }
+          for (video_id = 50; video_id < 53; video_id++) {
+              await getIntegralByVideo(video_id, token)//视频
+              await $.wait(5000)
+          }
           await scratch(token)//刮刮乐
           await $.wait(3000);
           for (exercise_id = 1; exercise_id < 6; exercise_id++) {
