@@ -86,32 +86,57 @@ function login(timeout = 0) {
       try {
         result = JSON.parse(data);
         if (result.code == 1) {
-           token = result.data.token
-           $.log(`\ntoken获取成功 开始执行签到`)
-           await $.wait(3000);
-           await sign(token);//签到
-		   await $.wait(3000);
-		   await qiandaonum(token);//签到天数
-		   await $.wait(3000);
-		   await getask(token)//答题
-       await $.wait(3000);
-       await getAnswer(token)//答题
-		   
-           await takeExercises1(token)
-           await takeExercises2(token)
-           await takeExercises3(token)
-           await takeExercises4(token)
-           await takeExercises5(token)
-        //    await takeExercises6(token)
-        //    await takeExercises7(token)
-        //    await takeExercises8(token)
+          token = result.data.token
+          $.log(`\ntoken获取成功 开始执行签到`)
+          await $.wait(3000);
+          await sign(token);//签到
+          await $.wait(3000);
+          await qiandaonum(token);//签到天数
+          await $.wait(3000);
+          await getask(token)//答题
+          await $.wait(3000);
+          await getAnswer(token)//答题
+          await $.wait(3000);
+          // for (video_id = 50; video_id < 53; video_id++) {
+          //     await getIntegralByVideo(video_id, token)//视频
+          //     await $.wait(5000)
+          // }
+          await scratch(token)//刮刮乐
+          await $.wait(3000);
+          for (exercise_id = 1; exercise_id < 6; exercise_id++) {
+            await takeExercises(exercise_id, token)//全民健身冰雪运动，让我们一起为奥运欢呼，多头体育，为祖国事业工作一百年
+            await $.wait(4 * 60001)
+            await receiveRewardsExercises(exercise_id, token)
+          }
+          // await takeExercises1(token)
+          
+          // await receiveRewardsExercises1(token)
+          // await takeExercises2(token)
+          // await $.wait(4 * 60001)
+          // await receiveRewardsExercises2(token)
+          // await takeExercises3(token)
+          // await $.wait(4 * 60001)
+          // await receiveRewardsExercises3(token)
+          // await takeExercises4(token)
+          // await $.wait(4 * 60001)
+          // await receiveRewardsExercises4(token)
+          // await takeExercises5(token)
+          // await $.wait(4 * 60001)
+          // await receiveRewardsExercises5(token)
+        //   await takeExercises2(token)
+        //   await takeExercises3(token)
+        //   await takeExercises4(token)
+        //   await takeExercises5(token)
+        // //    await takeExercises6(token)
+        // //    await takeExercises7(token)
+        // //    await takeExercises8(token)
            
-		   await $.wait(300000)
-           await receiveRewardsExercises1(token)
-		   await receiveRewardsExercises2(token)
-           await receiveRewardsExercises3(token)
-           await receiveRewardsExercises4(token)
-           await receiveRewardsExercises5(token)
+		    //   await $.wait(300000)
+          
+        //   await receiveRewardsExercises2(token)
+        //   await receiveRewardsExercises3(token)
+        //   await receiveRewardsExercises4(token)
+        //   await receiveRewardsExercises5(token)
         //    await receiveRewardsExercises6(token)
         //    await receiveRewardsExercises7(token)
         //    await receiveRewardsExercises8(token)
@@ -277,6 +302,67 @@ function qiandao(num) {
   })
 }
 
+function getIntegralByVideo(id, token) {
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://www.hzhuayangsz.com/api/tree/getIntegralByVideo`,
+      headers: {
+        'Host': 'www.hzhuayangsz.com',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://www.hzhuayangsz.com',
+        'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+        'Referer': 'https://www.hzhuayangsz.com/'
+      },
+      body: `{"id":"${id}","token":"${token}"}`,
+    }
+    $.post(url, async (err, resp, data) => {
+      try {
+        result = JSON.parse(data);
+        if (result.code == 1) {
+          $.log(`\n水滴领取成功` + result.data.reward)
+        } else {
+          $.log(`\n每天只能签到一次`)
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
+    }, 0)
+  })
+}
+
+
+function scratch(token) {
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://www.hzhuayangsz.com/api/user/scratch`,
+      headers: {
+        'Host': 'www.hzhuayangsz.com',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://www.hzhuayangsz.com',
+        'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+        'Referer': 'https://www.hzhuayangsz.com/'
+      },
+      body: `{"pg":0,"cz":0,"cm":1,"token":"${token}"}`,
+    }
+    $.post(url, async (err, resp, data) => {
+      try {
+        result = JSON.parse(data);
+        if (result.code == 1) {
+          $.log(`\n水滴领取成功` + result.data.reward)
+        } else {
+          $.log(`\n每天只能签到一次`)
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
+    }, 0)
+  })
+}
+
 function getask(token) {
   return new Promise((resolve) => {
     let url = {
@@ -343,43 +429,41 @@ function getAnswer(token) {
 }
 
 function getAnswerNext(token) {
-    return new Promise((resolve) => {
-      let url = {
-        url: `https://www.hzhuayangsz.com/api/index/getAnswer`,
-        headers: {
-          'Host': 'www.hzhuayangsz.com',
-          'Content-Type': 'application/json;charset=utf-8',
-          'Origin': 'https://www.hzhuayangsz.com',
-          'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
-          'Referer': 'https://www.hzhuayangsz.com/'
-        },
-        body: `{"type":3, "token":"${token}"}`,
-      }
-      $.post(url, async (err, resp, data) => {
-        try {
-          result = JSON.parse(data);
-          if (result.code == 1) {
-            $.log(`\n` + result.info)
-            await $.wait(Math.floor(Math.random()*(5000-3000+1000)+3000))
-            await getAnswerNext(token)
-          } else {
-            $.log(`\n` + result.info)
-          }
-        } catch (e) {
-          $.logErr(e, resp);
-        } finally {
-          resolve()
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://www.hzhuayangsz.com/api/index/getAnswer`,
+      headers: {
+        'Host': 'www.hzhuayangsz.com',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://www.hzhuayangsz.com',
+        'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+        'Referer': 'https://www.hzhuayangsz.com/'
+      },
+      body: `{"type":3, "token":"${token}"}`,
+    }
+    $.post(url, async (err, resp, data) => {
+      try {
+        result = JSON.parse(data);
+        if (result.code == 1) {
+          $.log(`\n` + result.info)
+          await $.wait(Math.floor(Math.random()*(5000-3000+1000)+3000))
+          await getAnswerNext(token)
+        } else {
+          $.log(`\n` + result.info)
         }
-      }, 0)
-    })
-  }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
+    }, 0)
+  })
+}
 
-
-function takeExercises7(token) {
-    
+function takeExercises(sid, token) {   
   return new Promise((resolve) => {
     
-	let url = {
+    let url = {
       url: `https://www.hzhuayangsz.com/api/index/takeExercises`,
       headers: {
         'Host': 'www.hzhuayangsz.com',
@@ -388,7 +472,7 @@ function takeExercises7(token) {
         'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
         'Referer': 'https://www.hzhuayangsz.com/'
       },
-      body: `{"sid":7,"token":"${token}"}`,
+      body: `{"sid":"${sid}","token":"${token}"}`,
     }
     
     $.post(url, async (err, resp, data) => {
@@ -411,42 +495,44 @@ function takeExercises7(token) {
     }, 0)
   })
 }
-function takeExercises1(token) {
+
+
+
+function takeExercises1(token) {   
+  return new Promise((resolve) => {
     
-    return new Promise((resolve) => {
-      
-      let url = {
-        url: `https://www.hzhuayangsz.com/api/index/takeExercises`,
-        headers: {
-          'Host': 'www.hzhuayangsz.com',
-          'Content-Type': 'application/json;charset=utf-8',
-          'Origin': 'https://www.hzhuayangsz.com',
-          'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
-          'Referer': 'https://www.hzhuayangsz.com/'
-        },
-        body: `{"sid":1,"token":"${token}"}`,
-      }
-      
-      $.post(url, async (err, resp, data) => {
-          
-        try {
-          result = JSON.parse(data);
-          
-          {
-          if (result.code == 1) {
-            $.log(`\n` + result.info)
-          } else {
-            $.log('\n1' + result.info)
-            await $.wait(Math.floor(Math.random()*(5000-3000+1000)+3000))}
-          }
-        } catch (e) {
-          $.logErr(e, resp);
-        } finally {
-          resolve()
+    let url = {
+      url: `https://www.hzhuayangsz.com/api/index/takeExercises`,
+      headers: {
+        'Host': 'www.hzhuayangsz.com',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://www.hzhuayangsz.com',
+        'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+        'Referer': 'https://www.hzhuayangsz.com/'
+      },
+      body: `{"sid":1,"token":"${token}"}`,
+    }
+    
+    $.post(url, async (err, resp, data) => {
+        
+      try {
+        result = JSON.parse(data);
+        
+        {
+        if (result.code == 1) {
+          $.log(`\n` + result.info)
+        } else {
+          $.log('\n1' + result.info)
+          await $.wait(Math.floor(Math.random()*(5000-3000+1000)+3000))}
         }
-      }, 0)
-    })
-  }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
+    }, 0)
+  })
+}
 
 function takeExercises2(token) {
     
@@ -665,38 +751,68 @@ function takeExercises8(token) {
   })
 }
 
+function receiveRewardsExercises(sid, token) {
+  return new Promise((resolve) => {
+    
+    let url = {
+      url: `https://www.hzhuayangsz.com/api/index/receiveRewardsExercises`,
+      headers: {
+        'Host': 'www.hzhuayangsz.com',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://www.hzhuayangsz.com',
+        'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+        'Referer': 'https://www.hzhuayangsz.com/'
+      },
+      body: `{"sid":"${sid}","token":"${token}"}`,
+    }
+    $.post(url, async (err, resp, data) => {
+      try {
+        result = JSON.parse(data);
+        if (result.code == 1) {
+          $.log(`\n` + result.info)
+        } else {
+          $.log('\n2' + result.info) 
+          await $.wait(Math.floor(Math.random()*(5000-3000+1000)+3000))}
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
+    }, 0)
+  })
+}
+
 
 function receiveRewardsExercises1(token) {
+  return new Promise((resolve) => {
     
-    return new Promise((resolve) => {
-     
-      let url = {
-        url: `https://www.hzhuayangsz.com/api/index/receiveRewardsExercises`,
-        headers: {
-          'Host': 'www.hzhuayangsz.com',
-          'Content-Type': 'application/json;charset=utf-8',
-          'Origin': 'https://www.hzhuayangsz.com',
-          'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
-          'Referer': 'https://www.hzhuayangsz.com/'
-        },
-        body: `{"sid":1,"token":"${token}"}`,
+    let url = {
+      url: `https://www.hzhuayangsz.com/api/index/receiveRewardsExercises`,
+      headers: {
+        'Host': 'www.hzhuayangsz.com',
+        'Content-Type': 'application/json;charset=utf-8',
+        'Origin': 'https://www.hzhuayangsz.com',
+        'user-agent': 'Mozilla/5.0 (iPad; CPU OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
+        'Referer': 'https://www.hzhuayangsz.com/'
+      },
+      body: `{"sid":1,"token":"${token}"}`,
+    }
+    $.post(url, async (err, resp, data) => {
+      try {
+        result = JSON.parse(data);
+        if (result.code == 1) {
+          $.log(`\n` + result.info)
+        } else {
+          $.log('\n2' + result.info) 
+          await $.wait(Math.floor(Math.random()*(5000-3000+1000)+3000))}
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
       }
-      $.post(url, async (err, resp, data) => {
-        try {
-          result = JSON.parse(data);
-          if (result.code == 1) {
-            $.log(`\n` + result.info)
-          } else {
-            $.log('\n2' + result.info) 
-            await $.wait(Math.floor(Math.random()*(5000-3000+1000)+3000))}
-        } catch (e) {
-          $.logErr(e, resp);
-        } finally {
-          resolve()
-        }
-      }, 0)
-    })
-  }
+    }, 0)
+  })
+}
 
 
 function receiveRewardsExercises2(token) {
