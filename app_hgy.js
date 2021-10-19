@@ -96,7 +96,7 @@ function login(timeout = 0) {
           await $.wait(3000);
           await getAnswer(token)//答题
           await $.wait(3000);
-          for (video_id = 50; video_id < 53; video_id++) {
+          for (video_id = 51; video_id < 54; video_id++) {
               await getIntegralByVideo(video_id, token)//视频
               await $.wait(5000)
           }
@@ -203,9 +203,9 @@ function getIntegralByVideo(id, token) {
       try {
         result = JSON.parse(data);
         if (result.code == 1) {
-          $.log(`\n水滴领取成功` + result.data.reward)
+          $.log(`\n水滴` + result.info)
         } else {
-          $.log(`\n每天只能签到一次`)
+          $.log(`\n${result.info}`)
         }
       } catch (e) {
         $.logErr(e, resp);
@@ -236,7 +236,7 @@ function scratch(token) {
         if (result.code == 1) {
           $.log(`\n水滴领取成功` + result.data.reward)
         } else {
-          $.log(`\n每天只能签到一次`)
+          $.log(`\n每天只能刮一次`)
         }
       } catch (e) {
         $.logErr(e, resp);
