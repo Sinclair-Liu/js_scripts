@@ -122,7 +122,7 @@ Object.keys(zqlookStartbodys).forEach((item) => {
     .finally(() => $.done())
 
 
-function openbox() {
+function openbox(timeout=0) {
     return new Promise((resolve) => {
         let url = {
             url : 'https://user.youth.cn/v1/Nameless/getBoxReward.json?'+ zqlookStartbody1,
